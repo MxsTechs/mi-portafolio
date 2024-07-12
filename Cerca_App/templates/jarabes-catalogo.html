@@ -1,0 +1,323 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CERCA SALUD || JARABES </title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+  <style>
+    .negro{
+      color: #000;
+    }
+    body {
+        background-color: #0A2260;
+    }
+    .navbar .img_bar {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar .img_bar img {
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .dropdown-menu {
+      min-width: 160px;
+    }
+    
+    .navbar-arena {
+        background-color: #1FBF91; /* Color arena */
+    }
+
+    .footer-arena {
+      background-color: #eae5c4; /* Color arena */
+      padding: 20px 0;
+      text-align: center;
+      border-top: 4px solid #000; /* Línea negra encima del pie de página */
+    }
+
+    .footer-arena a {
+      font-weight: bold;
+      color: #000;
+      position: relative;
+      top: -10px; /* Ajuste para colocar el texto del pie de página más arriba */
+    }
+    .Rec{
+    font-weight: 700;
+    font-size: 25px;
+
+    }
+    .img-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+    }
+    .subscribe-container {
+      position: relative;
+    }
+    .contorno{
+      border: 2px solid #0000009f;
+    }
+    .centrar{
+      text-align: center;
+    }
+    .Titulo{
+      font-size: 80px;
+      text-align: center;
+      -webkit-text-stroke: 0.3px black; /* Contorno negro de 1 píxel para navegadores basados en WebKit */
+      color: #1FBF91;
+    }
+    .anton-regular {
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    }
+  </style>
+</head>
+<body>
+  <!-- Inicio Barra de Navegacion -->
+  <nav class="navbar navbar-expand-lg navbar-light navbar-arena">
+    <img class="navbar-brand" src="{% static 'imagenes/logo2.png' %}" width="100px" alt="">
+    <a class="navbar-brand" href="{% url 'home' %}">Cerca Salud</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav mr-auto">
+        <a class="nav-item nav-link" href="{% url 'home' %}">Principal <span class="sr-only">(current)</span></a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Catálogo
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'pastillas' %}">Pastillas</a>
+            <a class="dropdown-item" href="{% url 'jarabes' %}">Jarabes</a>
+            <a class="dropdown-item" href="{% url 'sexual' %}">Bienestar Sexual</a>
+          </div>
+        </li>
+        <a class="nav-item nav-link" href="{% url 'todoslosproductos' %}">Ver Productos</a>
+        <a class="nav-item nav-link" href="{% url 'pedido' %}">Seguimiento</a>
+        <a class="nav-item nav-link" href="{% url 'ofertas' %}">Ofertas!</a>
+        <a class="nav-item nav-link" href="{% url 'quienessomos' %}">¿Quienes Somos?</a>
+      </div>
+      <div class="img_bar">
+        <div class="dropdown"> 
+            <img src="{% static '/imagenes/Usuario.png' %}" width="50px" height="50px" alt="" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              {% if usuarioVista is None %}
+                  <a class="dropdown-item" href="{% url 'login' %}">Iniciar Sesión</a>
+                  <a class="dropdown-item" href="{% url 'registro' %}">Registrarse</a>
+              {% else %}
+                  <a class="dropdown-item" href="{% url 'ajustes' %}">Perfil</a>
+              {% endif %}
+          </div>
+        </div>
+        <a href="{% url 'carro' %}"><img src="{% static '/imagenes/Carro.png' %}" width="50px" height="50px" alt=""></a>
+      </div>
+    </div>
+  </nav>
+  <!-- Termino Barra de Navegacion -->
+
+
+  <img src="{% static 'imagenes/patillas.png' %}" class="img-fluid img-center" alt="Quienes Somos">
+  <br>
+  <br>
+
+  <h1 class="text-center anton-regular Titulo">Jarabes</h1>
+  <br>
+  <br>
+
+
+  <!-- Pastillas -->
+
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-md-3 mb-4">
+        <div class="card contorno">
+          <img src="{% static '/imagenes/jarabe1.jpg' %}" class="card-img-top" alt="Producto 1">
+          <div class="card-body">
+            <h5 class="card-title">Panadol</h5>
+            <p class="card-text">$3.000</p>
+            <a href="#" class="btn btn-primary contorno">Agregar al carrito</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3  mb-4">
+        <div class="card contorno">
+          <img src="{% static '/imagenes/jarabe2.jpg' %}" class="card-img-top" alt="Producto 1">
+          <div class="card-body">
+            <h5 class="card-title">Panadol</h5>
+            <p class="card-text">$3.000</p>
+            <a href="#" class="btn btn-primary contorno">Agregar al carrito</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="card contorno">
+          <img src="{% static '/imagenes/jarabe7.jpg' %}" class="card-img-top" alt="Producto 1">
+          <div class="card-body">
+            <h5 class="card-title">Aerius </h5>
+            <p class="card-text">$3.000</p>
+            <a href="#" class="btn btn-primary contorno">Agregar al carrito</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="card contorno">
+          <img src="{% static '/imagenes/jarabe4.jpg' %}" class="card-img-top" alt="Producto 1">
+          <div class="card-body">
+            <h5 class="card-title">Despeval</h5>
+            <p class="card-text">$3.000</p>
+            <a href="#" class="btn btn-primary contorno">Agregar al carrito</a>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <div class="col-md-3 mb-4">
+        <div class="card contorno">
+          <img src="{% static '/imagenes/jarabe5.jpg' %}" class="card-img-top" alt="Producto 1">
+          <div class="card-body">
+            <h5 class="card-title">Aerius</h5>
+            <p class="card-text">$3.000</p>
+            <a href="#" class="btn btn-primary contorno">Agregar al carrito</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="card contorno">
+          <img src="{% static '/imagenes/jarabe6.jpg' %}" class="card-img-top" alt="Producto 1">
+          <div class="card-body">
+            <h5 class="card-title">Despex</h5>
+            <p class="card-text">$3.000</p>
+            <a href="#" class="btn btn-primary contorno">Agregar al carrito</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="card contorno">
+          <img src="{% static '/imagenes/jarabe7.jpg' %}" class="card-img-top" alt="Producto 1">
+          <div class="card-body">
+            <h5 class="card-title">Aerius</h5>
+            <p class="card-text">$3.000</p>
+            <a href="#" class="btn btn-primary contorno">Agregar al carrito</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="card contorno">
+          <img src="{% static '/imagenes/jarabe8.jpg' %}" class="card-img-top" alt="Producto 1">
+          <div class="card-body">
+            <h5 class="card-title">Radigen</h5>
+            <p class="card-text">$3.000</p>
+            <a href="#" class="btn btn-primary contorno">Agregar al carrito</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="card contorno">
+          <img src="{% static '/imagenes/jarabe9.jpg' %}" class="card-img-top" alt="Producto 1">
+          <div class="card-body">
+            <h5 class="card-title">Spiron</h5>
+            <p class="card-text">$3.000</p>
+            <a href="#" class="btn btn-primary contorno">Agregar al carrito</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="card contorno">
+          <img src="{% static '/imagenes/jarabe10.jpg' %}" class="card-img-top" alt="Producto 1">
+          <div class="card-body">
+            <h5 class="card-title">Degrater</h5>
+            <p class="card-text">$3.000</p>
+            <a href="#" class="btn btn-primary contorno">Agregar al carrito</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="card contorno">
+          <img src="{% static '/imagenes/jarabe11.jpg' %}" class="card-img-top" alt="Producto 1">
+          <div class="card-body">
+            <h5 class="card-title">Xuzal</h5>
+            <p class="card-text">$3.000</p>
+            <a href="#" class="btn btn-primary contorno">Agregar al carrito</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="card contorno">
+          <img src="{% static '/imagenes/jarabe12.jpg' %}" class="card-img-top" alt="Producto 1">
+          <div class="card-body">
+            <h5 class="card-title">Perebron</h5>
+            <p class="card-text">$3.000</p>
+            <a href="#" class="btn btn-primary contorno">Agregar al carrito</a>
+          </div>
+        </div>
+      </div>
+      <!-- Agrega más productos aquí -->
+    </div>
+  </div>
+  <!-- CIERRE Pastillas -->
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+<!-- Cuadro de suscripción -->
+<div class="container-fluid mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <div class="card">
+        <img src="{% static '/imagenes/afiliado.PNG' %}" class="card-img-top img-fluid" alt="Suscripción">
+        <div class="card-body">
+          <h5 class="card-title">AFILIATE!!!!</h5>
+          <p class="card-text">Afíliate con nosotros para estar al tanto de todas nuestras ofertas.</p>
+          <form onsubmit="return validateSubscriptionForm()">
+            <div class="form-group">
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingresa tu correo electrónico" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin del Cuadro de suscripción -->
+
+<!-- Pie de página -->
+<div class="container-fluid navbar-arena negro">
+  <footer class="py-3 my-4 negro">
+    <ul class="nav justify-content-center pb-3 mb-3">
+      <li class="nav-item negro"><a href="{% url 'home' %}" class="nav-link px-2 negro">Principal</a></li>
+      <li class="nav-item negro"><a href="{% url 'ubicacionusuario' %}" class="nav-link px-2 negro">Ubicación del Usuario</a></li>
+      <li class="nav-item negro"><a href="{% url 'solicitud' %}" class="nav-link px-2 negro">Contáctanos</a></li>
+    </ul>
+    <p class="text-center negro">© 2024 Cerca Salud</p>
+  </footer>
+</div>
+<!-- Cierre Pie de página -->
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+  function validateSubscriptionForm() {
+    var email = document.getElementById("exampleInputEmail1").value;
+    var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!emailPattern.test(email)) {
+      alert("Por favor, ingresa un correo electrónico válido.");
+      return false;
+    }
+    return true;
+  }
+</script>
+</body>
+</html>

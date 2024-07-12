@@ -1,0 +1,237 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pago</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .negro{
+      color: #000;
+    }
+    .center-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-container {
+      max-width: 300px;
+    }
+    .login-container {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-box {
+      background-color: #f8f9fa;
+      border-radius: 4px;
+      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    }
+    .nombre_emp {
+      color: #fcf6dc;
+      font-size: 40px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .logo {
+      max-width: 100%;
+      height: auto;
+    }
+    body {
+        background-color: #0A2260;
+    }
+
+    .nom_emp {
+      background-color: #8dc63f;
+      border-radius: 4px;
+      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    }
+
+    .navbar .img_bar {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar .img_bar img {
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .dropdown-menu {
+      min-width: 160px;
+    }
+    
+    .navbar-arena {
+        background-color: #1FBF91; /* Color arena */
+    }
+    .footer-arena {
+      position: absolute; 
+      bottom: 0; 
+      width: 100%; 
+      padding: 20px 0; 
+      text-align: center; 
+    }
+
+    .footer-arena img {
+      margin-top: 10px; 
+    }
+
+    .footer-links {
+      margin-top: 20px; 
+    }
+
+    .footer-links a {
+      margin-right: 20px; 
+      color: #000; 
+    }
+    .navbar-arena, .footer-arena {
+      background-color: #1FBF91; 
+    }
+    .footer-arena {
+      background-color: #eae5c4; /* Color arena */
+      padding: 20px 0;
+      text-align: center;
+      border-top: 4px solid #000; /* Línea negra encima del pie de página */
+    }
+
+    .footer-arena a {
+      font-weight: bold;
+      color: #000;
+      position: relative;
+      top: -10px; /* Ajuste para colocar el texto del pie de página más arriba */
+    }
+    .Rec{
+    font-weight: 700;
+    font-size: 40px;
+
+    }
+    
+  </style>
+</head>
+<body>
+  <!-- Inicio Barra de Navegacion -->
+  <nav class="navbar navbar-expand-lg navbar-light navbar-arena">
+    <img class="navbar-brand" src="{% static 'imagenes/logo2.png' %}" width="100px" alt="">
+    <a class="navbar-brand" href="{% url 'home' %}">Cerca Salud</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav mr-auto">
+        <a class="nav-item nav-link" href="{% url 'home' %}">Principal <span class="sr-only">(current)</span></a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Catálogo
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'pastillas' %}">Pastillas</a>
+            <a class="dropdown-item" href="{% url 'jarabes' %}">Jarabes</a>
+            <a class="dropdown-item" href="{% url 'sexual' %}">Bienestar Sexual</a>
+          </div>
+        </li>
+        <a class="nav-item nav-link" href="{% url 'todoslosproductos' %}">Ver Productos</a>
+        <a class="nav-item nav-link" href="{% url 'pedido' %}">Seguimiento</a>
+        <a class="nav-item nav-link" href="{% url 'ofertas' %}">Ofertas!</a>
+        <a class="nav-item nav-link" href="{% url 'quienessomos' %}">¿Quienes Somos?</a>
+      </div>
+      <div class="img_bar">
+        <div class="dropdown"> 
+            <img src="{% static '/imagenes/Usuario.png' %}" width="50px" height="50px" alt="" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="{% url 'login' %}">Iniciar Sesión</a>
+                <a class="dropdown-item" href="{% url 'registro' %}">Registrarse</a>
+            </div>
+        </div>
+        <a href="{% url 'carro' %}"><img src="{% static '/imagenes/Carro.png' %}" width="50px" height="50px" alt=""></a>
+      </div>
+    </div>
+  </nav>
+  <!-- Termino Barra de Navegacion -->
+  <div class="center-container">
+    <div class="form-container">
+      <h1 class="text-center mb-4 text-white">Ingrese su Targeta</h1>
+      <div class="login-box p-4">
+        <form id="paymentForm">
+          <div class="form-group">
+            <label for="cardNumber">Card Number</label>
+            <div class="nom_emp p-3 mb-3">
+              <input type="text" class="form-control" id="cardNumber" placeholder="Enter card number" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="expiryDate">Expiry Date</label>
+            <div class="nom_emp p-3 mb-3">
+              <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="cvv">CVV</label>
+            <div class="nom_emp p-3 mb-3">
+              <input type="text" class="form-control" id="cvv" placeholder="CVV" required>
+            </div>
+          </div>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="saveCard">
+            <label class="form-check-label" for="saveCard">¿Desea guardar los datos de la tarjeta?</label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Pagar Ahora</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pie de página -->
+  <div class="container-fluid navbar-arena negro">
+    <footer class="py-3 my-4 negro">
+      <ul class="nav justify-content-center pb-3 mb-3">
+        <li class="nav-item negro"><a href="{% url 'home' %}" class="nav-link px-2 negro">Principal</a></li>
+        <li class="nav-item negro"><a href="{% url 'ubicacionusuario' %}" class="nav-link px-2 negro">Ubicacion del Usuario</a></li>
+        <li class="nav-item negro"><a href="{% url 'solicitud' %}" class="nav-link px-2 negro">Contactanos</a></li>
+      </ul>
+      <p class="text-center negro">© 2024 Cerca Salud</p>
+    </footer>
+  </div>
+  <!-- Cierre Pie de página -->
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    document.getElementById('paymentForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      var cardNumber = document.getElementById('cardNumber').value;
+      var expiryDate = document.getElementById('expiryDate').value;
+      var cvv = document.getElementById('cvv').value;
+
+      if (validateCardNumber(cardNumber) && validateExpiryDate(expiryDate) && validateCVV(cvv)) {
+        alert('Pagado!');
+        // Aquí podrías agregar código para enviar los datos a tu servidor y procesar el pago
+      } else {
+        alert('Porfavor ingrese los datos correctamente.');
+      }
+    });
+
+    function validateCardNumber(cardNumber) {
+      var regex = /^[0-9]{16}$/; // Se espera un número de tarjeta de crédito de 16 dígitos
+      return regex.test(cardNumber);
+    }
+
+    function validateExpiryDate(expiryDate) {
+      var regex = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/; // Se espera una fecha de formato MM/YY
+      return regex.test(expiryDate);
+    }
+
+    function validateCVV(cvv) {
+      var regex = /^[0-9]{3,4}$/; // Se espera un CVV de 3 o 4 dígitos
+      return regex.test(cvv);
+    }
+  </script>
+</body>
+</html>

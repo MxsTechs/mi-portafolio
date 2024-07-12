@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuario</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+</head>
+<body>
+    <!--LA BARRA DE ARRIBA-->
+    <div class="topbar">
+        <div class="d-flex align-items-center">
+            <button class="toggle-sidebar" id="toggle-sidebar"><i class="fas fa-bars"></i></button>
+            <img src="{% static 'imagenes/logo-admin.png' %}" alt="Logo" class="img-fluid" style="max-height: 80px;">
+        </div>
+        <div class="d-none d-sm-flex justify-content-center flex-grow-1">
+            <span class="text-center">C E R C A  &nbsp; S A L U D</span>
+        </div>
+        <a href="{% url 'CerrarSesion' %}" class="btn btn-danger">Cerrar Sesión</a>
+    </div>
+
+    <!--LA BARRA LATERAL-->
+    <div class="sidebar" id="sidebar">
+        <br>
+        <br>
+        <br>
+        <a href="{% url 'logmin' %}" title="Principal"><span>Principal</span></a>
+        <a href="{% url 'admin_inventario' %}" title="Inventario"><span>Inventario</span></a>
+        <a href="{% url 'admin_usuarios' %}" class="active" title="Usuarios"><span>Usuarios</span></a>
+        <a href="{% url 'admin_buzon' %}" title="Buzón"><span>Buzón</span></a>
+        <a href="{% url 'admin_permisos' %}" title="Permisos"><span>Permisos</span></a>
+        <a href="{% url 'admin_pedidos' %}" title="Pedidos"><span>Pedidos</span></a>
+        <a href="{% url 'home' %}" <button class="back-button"><span>BACK</span></button>></a>
+    </div>
+    <!--CONTENIDO CENTRAL-->
+    <div class="main-content">
+        <br>
+        <br>
+        <h1>Usuarios</h1>
+        <div class="container bg-white p-4 rounded">
+            <div class="d-flex justify-content-start mb-3">
+                <a class="btn btn-primary" href="{% url 'agregar_usuario' %}" role="button">Agregar Usuario</a>
+            </div>
+            <form method="POST" action="{% url 'Filtrar' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                <label for="nombre" class="btn-danger"> Nombre </label>
+                <input type="text" class="form-control" name="nombre" id="nombre" aria-describedby="emailHelp">
+                </div>
+                <button type="submit" class="btn btn-primary">Fitrar</button>
+            </form>
+            <br>
+            <div class="table-responsive">
+                <table id="tablaUsuarios" class="table table-bordered table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre Usuario</th>
+                            <th scope="col">Correo Usuario</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for usuario in usuarios %}
+                        <tr>
+                            <td scope="row">{{ usuario.id }}</td>
+                            <td>{{ usuario.nombre }}</td>
+                            <td>{{ usuario.correo }}</td>
+                            <td>
+                                <a href="{% url 'ModificarUsuario' usuario.id %}" <button class="btn btn-warning">Modificar</button>></a>
+                                <a href="{% url 'EliminarUsuario' usuario.id %}" onclick="return confirmDelete()">
+                                    <button class="btn btn-danger ml-2">Eliminar</button>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+    <!--scrip-->
+    <script src="{% static 'js-barra.js' %}"></script>
+    <script>
+        function confirmDelete() {
+            return confirm("¿De seguro desea eliminar este usuario?");
+        }
+        
+        $(document).ready(function () {
+            $('#tablaUsuarios').DataTable();
+            
+            $('#guardarUsuario').on('click', function() {
+                var form = $('#formAgregarUsuario')[0];
+                if (form.checkValidity()) {
+                    // Aquí puedes agregar el código para enviar el formulario al servidor si todo es válido.
+                    alert('Usuario agregado con éxito.');
+                    $('#agregarUsuarioModal').modal('hide');
+                } else {
+                    form.reportValidity();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

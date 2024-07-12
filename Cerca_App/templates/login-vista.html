@@ -1,0 +1,213 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CERCA SALUD || LOGIN</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .login-container {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-box {
+      background-color: #f8f9fa;
+      border-radius: 4px;
+      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    }
+    .nombre_emp {
+      color: #fcf6dc;
+      font-size: 40px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .logo {
+      max-width: 100%;
+      height: auto;
+    }
+    body {
+        background-color: #0A2260;
+    }
+
+    .nom_emp {
+      background-color: #8dc63f;
+      border-radius: 4px;
+      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    }
+
+    .navbar .img_bar {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar .img_bar img {
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .dropdown-menu {
+      min-width: 160px;
+    }
+    
+    .navbar-arena {
+        background-color: #1FBF91; 
+    }
+    .footer-arena {
+      position: absolute; 
+      bottom: 0; 
+      width: 100%; 
+      padding: 20px 0; 
+      text-align: center; 
+    }
+
+    .footer-arena img {
+      margin-top: 10px; 
+    }
+
+    .footer-links {
+      margin-top: 20px; 
+    }
+
+    .footer-links a {
+      margin-right: 20px; 
+      color: #000; 
+    }
+    .navbar-arena, .footer-arena {
+      background-color: #1FBF91; 
+    }
+    .footer-arena {
+      background-color: #eae5c4; /* Color arena */
+      padding: 20px 0;
+      text-align: center;
+      border-top: 4px solid #000; /* Línea negra encima del pie de página */
+    }
+
+    .footer-arena a {
+      font-weight: bold;
+      color: #000;
+      position: relative;
+      top: -10px; /* Ajuste para colocar el texto del pie de página más arriba */
+    }
+    .Rec{
+    font-weight: 700;
+    font-size: 40px;
+
+    }
+    .negro{
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <!-- Inicio Barra de Navegacion -->
+  <nav class="navbar navbar-expand-lg navbar-light navbar-arena">
+    <img class="navbar-brand" src="{% static 'imagenes/logo2.png' %}" width="100px" alt="">
+    <a class="navbar-brand" href="{% url 'home' %}">Cerca Salud</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav mr-auto">
+        <a class="nav-item nav-link" href="{% url 'home' %}">Principal <span class="sr-only">(current)</span></a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Catálogo
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'pastillas' %}">Pastillas</a>
+            <a class="dropdown-item" href="{% url 'jarabes' %}">Jarabes</a>
+            <a class="dropdown-item" href="{% url 'sexual' %}">Bienestar Sexual</a>
+          </div>
+        </li>
+        <a class="nav-item nav-link" href="{% url 'todoslosproductos' %}">Ver Productos</a>
+        <a class="nav-item nav-link" href="{% url 'pedido' %}">Seguimiento</a>
+        <a class="nav-item nav-link" href="{% url 'ofertas' %}">Ofertas!</a>
+        <a class="nav-item nav-link" href="{% url 'quienessomos' %}">¿Quienes Somos?</a>
+      </div>
+      <div class="img_bar">
+        <div class="dropdown"> 
+            <img src="{% static '/imagenes/Usuario.png' %}" width="50px" height="50px" alt="" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="{% url 'login' %}">Iniciar Sesión</a>
+                <a class="dropdown-item" href="{% url 'registro' %}">Registrarse</a>
+            </div>
+        </div>
+        <a href="{% url 'carro' %}"><img src="{% static '/imagenes/Carro.png' %}" width="50px" height="50px" alt=""></a>
+      </div>
+    </div>
+  </nav>
+  <!-- Termino Barra de Navegacion -->
+  <div class="container-fluid">
+    <div class="row login-container">
+      <div class="col-md-6">
+        <div class="text-center mb-4">
+            <img src="{% static '/imagenes/prueba cercasalud.png' %}" alt="Logo de la Empresa" class="logo">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="p-4 login-box">
+          <h2 class="text-center mb-4">Iniciar Sesión</h2>
+          <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="correo">Correo Electrónico:</label>
+              <input type="email" class="form-control" id="correo" name="correo" required>
+            </div>
+            <div class="form-group">
+              <label for="contrasenia">Contraseña:</label>
+              <input type="password" class="form-control" id="contrasenia" name="contrasenia" required>
+            </div>
+          <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- Pie de página -->
+    <div class="container-fluid navbar-arena negro">
+      <footer class="py-3 my-4 negro">
+        <ul class="nav justify-content-center pb-3 mb-3">
+          <li class="nav-item negro"><a href="{% url 'home' %}" class="nav-link px-2 negro">Principal</a></li>
+          <li class="nav-item negro"><a href="{% url 'ubicacionusuario' %}" class="nav-link px-2 negro">Ubicacion del Usuario</a></li>
+          <li class="nav-item negro"><a href="{% url 'solicitud' %}" class="nav-link px-2 negro">Contactanos</a></li>
+        </ul>
+        <p class="text-center negro">© 2024 Cerca Salud</p>
+      </footer>
+    </div>
+    <!-- Cierre Pie de página -->
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Validación JavaScript -->
+  <script>
+    function validateForm() {
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+      
+      if (username === '' || password === '') {
+        alert('Por favor, complete todos los campos.');
+        return false;
+      }
+      
+      if (username.length < 3) {
+        alert('El nombre de usuario debe tener al menos 3 caracteres.');
+        return false;
+      }
+      
+      if (password.length < 6) {
+        alert('La contraseña debe tener al menos 6 caracteres.');
+        return false;
+      }
+      
+      return true;
+    }
+  </script>
+</body>
+</html>

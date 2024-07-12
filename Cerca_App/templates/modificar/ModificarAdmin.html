@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar-Admin</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+</head>
+<body>
+    <!--LA BARRA DE ARRIBA-->
+    <div class="topbar">
+        <div class="d-flex align-items-center">
+            <button class="toggle-sidebar" id="toggle-sidebar"><i class="fas fa-bars"></i></button>
+            <img src="{% static 'imagenes/logo-admin.png' %}"Logo" class="img-fluid" style="max-height: 80px;">
+        </div>
+        <td>
+
+    <div class="d-none d-sm-flex justify-content-center flex-grow-1">
+    <span class="text-center">C E R C A  &nbsp; S A L U D</span>
+    </div>
+        <span><i class="fa fa-user-circle"></i></span>
+    </div>
+
+    <!--LA BARRA LATERAL-->
+    <div class="sidebar" id="sidebar">
+        <br>
+        <br>
+        <br>
+        <a href="{% url 'admin' %}" title="Principal"><span>Principal</span></a>
+        <a href="{% url 'admin_inventario' %}" title="Inventario"><span>Inventario</span></a>
+        <a href="{% url 'admin_usuarios' %}" title="Usuarios"><span>Usuarios</span></a>
+        <a href="{% url 'admin_buzon' %}" title="Buzón"><span>Buzón</span></a>
+        <a href="{% url 'admin_permisos' %}" class="active" title="Permisos"><span>Permisos</span></a>
+        <a href="{% url 'admin_pedidos' %}" title="Pedidos"><span>Pedidos</span></a>
+        <a href="{% url 'home' %}" <button class="back-button"><span>BACK</span></button>></a>
+    </div>
+    <!--CONTENIDO CENTRAL-->
+    <div class="main-content">
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Modificar Admin</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{% url 'ModificarAdmin' admin.id_admin %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="nombre_Admin">Nombre</label>
+                            <input type="text" class="form-control" name="nombre_Admin" id="nombre_Admin" aria-describedby="emailHelp" value="{{ admin.nombre_Admin }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="correo_Admin">correo</label>
+                            <input type="text" class="form-control" name="correo_Admin" id="correo_Admin" value="{{ admin.correo_Admin}}">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="{% static 'js-barra.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#guardarUsuario').on('click', function(event) {
+                event.preventDefault();
+                var form = $('#formAgregarUsuario')[0];
+                if (form.checkValidity()) {
+                    alert('Usuario agregado con éxito.');
+                    $('#formAgregarUsuario')[0].reset();
+                } else {
+                    form.reportValidity();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

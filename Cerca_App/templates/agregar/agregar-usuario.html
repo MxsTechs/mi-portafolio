@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar-Usuario</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+</head>
+<body>
+    <!--LA BARRA DE ARRIBA-->
+    <div class="topbar">
+        <div class="d-flex align-items-center">
+            <button class="toggle-sidebar" id="toggle-sidebar"><i class="fas fa-bars"></i></button>
+            <img src="{% static 'imagenes/logo-admin.png' %}"Logo" class="img-fluid" style="max-height: 80px;">
+        </div>
+        <td>
+
+    <div class="d-none d-sm-flex justify-content-center flex-grow-1">
+    <span class="text-center">C E R C A  &nbsp; S A L U D</span>
+    </div>
+        <span><i class="fa fa-user-circle"></i></span>
+    </div>
+
+    <!--LA BARRA LATERAL-->
+    <div class="sidebar" id="sidebar">
+        <br>
+        <br>
+        <br>
+        <a href="{% url 'admin' %}" title="Principal"><span>Principal</span></a>
+        <a href="{% url 'admin_inventario' %}" title="Inventario"><span>Inventario</span></a>
+        <a href="{% url 'admin_usuarios' %}" class="active" title="Usuarios"><span>Usuarios</span></a>
+        <a href="{% url 'admin_buzon' %}" title="Buzón"><span>Buzón</span></a>
+        <a href="{% url 'admin_permisos' %}" title="Permisos"><span>Permisos</span></a>
+        <a href="{% url 'admin_pedidos' %}" title="Pedidos"><span>Pedidos</span></a>
+        <a href="{% url 'home' %}" <button class="back-button"><span>BACK</span></button>></a>
+    </div>
+    <!--CONTENIDO CENTRAL-->
+    <div class="main-content">
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Agregar Usuario</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{% url 'agregar_usuario' %}" id="formAgregarUsuario">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="nombre_usuario">Nombre de Usuario</label>
+                            <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="correoUsuario">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="correoUsuario" name="correoUsuario" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contrasenia_usuario">Contraseña</label>
+                            <input type="password" class="form-control" id="contrasenia_usuario" name="contrasenia_usuario" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="direccion_usuario">Dirección</label>
+                            <input type="text" class="form-control" id="direccion_usuario" name="direccion_usuario" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="numero_usuario">Número Telefónico</label>
+                            <input type="number" class="form-control" id="numero_usuario" name="numero_usuario" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="guardarUsuario">Guardar Usuario</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="{% static 'js-barra.js' %}"></script>
+    <script>
+        function validateNombre(nombre) {
+            return nombre.length > 5;
+        }
+
+        function validateContrasenia(contrasenia) {
+            return contrasenia.length > 5 && /[A-Z]/.test(contrasenia);
+        }
+
+        function validateDireccion(direccion) {
+            return direccion.length > 20;
+        }
+
+        function validateNumero(numero) {
+            return /^\d{9}$/.test(numero);
+        }
+
+    </script>
+</body>
+</html>
